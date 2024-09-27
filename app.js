@@ -102,9 +102,7 @@
     constructor(boardElement) {
         this.tileElement = document.createElement("div")
         this.tileElement.classList.add("tile")
-        /* this.value = Math.random() > 0.5 ? 2 : 4
-        this.tileElement.textContent = this.value */
-        this.setColor(Math.random() > 0.5 ? 2 : 4)
+        this.setColor(2)
         boardElement.append(this.tileElement)
     }
 

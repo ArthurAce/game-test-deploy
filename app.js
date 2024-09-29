@@ -1,7 +1,9 @@
 
     const game = document.getElementById('game')
+    const newGameBtn = document.querySelector('.new-game')
 
-
+    let score = 0
+    let gameOver = false
 
     const boardSize = 4;
     const boardSizeCount = boardSize * boardSize;
@@ -88,12 +90,25 @@
         return this.isEmpty() || (!this.hasTileForCombine() && this.linkedTile.value === newTile.value)
       }
 
+
       
-      combineTiles() {
+      /* combineTiles() {
         this.linkedTile.setValue(this.linkedTile.value + this.linkedTileForCombine.value)
         this.linkedTileForCombine.removeFromDOM()
         this.notLinkTileCombine()
-      }
+      } */
+
+        combineTiles() {
+          const combinedValue = this.linkedTile.value + this.linkedTileForCombine.value;
+          
+          this.linkedTile.setValue(combinedValue);
+          this.linkedTileForCombine.removeFromDOM()
+          this.notLinkTileCombine()
+
+          score += combinedValue
+          updateScoreDisplay()
+        }
+          
 
     }
     
@@ -106,10 +121,28 @@
         boardElement.append(this.tileElement)
     }
 
+
     setValue(value) {
-      this.value = value;
-      this.setColor(value);
+      this.value = value
+      this.setColor(value)
+
+      function endGame(message) {
+        gameOver = true
+        window.removeEventListener('keydown', handleInput);
+      
+        setTimeout(() => {
+          alert(message)
+        }, 500);
+      }
+      
+
+      if (this.value === 2048) {
+        endGame('You won! Congratulations! 🎉');
+      }
+
     }
+
+    
 
     setXY(x, y) {
       this.x = x
@@ -154,8 +187,20 @@ function setInput() {
   window.addEventListener('keydown', handleInput, {once: true})
 }
 
+function updateScoreDisplay() {
+  const scoreElement = document.getElementById('score');
+  scoreElement.textContent = `Score: ${score}`;
+}
+
+
+
 async function handleInput(event) {
   //console.log('Key pressed:', event.key);
+
+  if (gameOver) {
+    return
+  }
+
   switch(event.key) {
     case 'ArrowUp':
       if (!canMoveUp()) {
@@ -190,6 +235,7 @@ async function handleInput(event) {
       return
   }
 
+  
 
   const newTile = new Tile(game)
   board.getRandomEmptyItem().linkTile(newTile)
@@ -198,7 +244,8 @@ async function handleInput(event) {
     //await newTile.waitMoveCheck()
     alert('Loose???Ohhh...Dont worry, next time will be the same result)))')
     return
-  }   
+  }
+
 
   setInput()
 }
@@ -291,5 +338,39 @@ function canMoveInGroup(group) {
     return targetItem.canCombine(item.linkedTile)
   })
 }
+
+
+newGameBtn.addEventListener('click', startNewGame);
+
+function startNewGame() {
+  // Сброс флага окончания игры
+  gameOver = false;
+
+  // Очистить текущее игровое поле
+  board.items.forEach(item => {
+    if (item.linkedTile) {
+      item.linkedTile.removeFromDOM();  // Удалить плитки из DOM
+      item.notLinkTile();  // Удалить ссылку на плитку
+    }
+    if (item.linkedTileForCombine) {
+      item.notLinkTileCombine();
+    }
+  });
+
+  // Сбросить счет
+  score = 0;
+  updateScoreDisplay();
+
+  // Инициализировать новую игру (добавляем одну плитку на доску)
+  board.getRandomEmptyItem().linkTile(new Tile(game));
+
+  // Включить ввод с клавиатуры
+  setInput();
+}
+
+
+
+
+
 
 

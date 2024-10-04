@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>2048</title>
+    <link rel="shortcut icon" href="favicon/favicon.ico" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
@@ -13,6 +14,7 @@
 
 
     <div id="game" class="game">
+    <!-- <div class="game-name">2048</div> -->
     <div class="text">Good Luck!</div>
     <div id="score" class="score">Score: 0</div>
     <button class="new-game"><span>New Game</span></button>
@@ -39,14 +41,11 @@
         <div class="tile">2048</div> -->
     </div>
 
-    <!-- <div id="game-score-list" class="game-score-list">
-        <div id="records">
-        <h3>Top 10 Records</h3>
-        <ul id="records-list"></ul>
-        </div>
-        <button id="new-game">New Game</button>
-        <div id="score">Score: 0</div>
-    </div> -->
+    <div class="records">
+        <h2 class="records__title">Best scores:</h2>
+        <ul id="best-scores-list" class="records__list"></ul>
+    </div>
+
 
 
     <footer>

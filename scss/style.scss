@@ -49,7 +49,7 @@ body {
     align-items: center;
     font-size: 4vmin;
     border-radius: 5px;
-    transition: 0.2s all ease;
+    transition: 0.1s all ease;
 }
 
 .text {
@@ -77,6 +77,16 @@ body {
     font-size: 12px;
     width: 250px;
     opacity: 0.3;
+}
+
+.game-name {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 148px;
+    width: 100%;
+    opacity: 0.3;  
 }
 
 .new-game {
@@ -138,6 +148,24 @@ body {
     }
 }
 
+.records {
+    height: 52vmin;
+    width: 36vmin;
+    position: relative;
+    background-color: #a68c95;
+    border-radius: 5px;
+    margin-left: 1.5vmin;
+    &__title {
+        color: #f5f5f5;
+        text-align: center;
+        border-bottom: 2px solid #f5f5f541;
+        margin: 10px 0;
+    }
+    &__list {
+        color: #f5f5f5;
+        margin: 0 30px;
+    }
+}
 
 footer {
     position: absolute;
@@ -146,10 +174,6 @@ footer {
     display: block;
     width: 100%;
     height: 50px;
-    background: #a68c95bd;
-    -webkit-box-shadow: 0px -4px 28px -4px rgba(0,8,7,1);
-    -moz-box-shadow: 0px -4px 28px -4px rgba(0,8,7,1);
-    box-shadow: 0px -4px 28px -4px rgba(0,8,7,1);
     display: flex;
     justify-content: space-between;
     align-items: center;

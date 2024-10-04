@@ -7,6 +7,17 @@
 
     const boardSize = 4;
     const boardSizeCount = boardSize * boardSize;
+
+    function endGame(message) {
+      gameOver = true
+      window.removeEventListener('keydown', handleInput);
+
+      addBestScore(score);
+    
+      setTimeout(() => {
+        alert(message)
+      }, 500);
+    }
     
      class Board {
       constructor(boardElement) {
@@ -126,14 +137,16 @@
       this.value = value
       this.setColor(value)
 
-      function endGame(message) {
+      /* function endGame(message) {
         gameOver = true
         window.removeEventListener('keydown', handleInput);
+
+        addBestScore(score);
       
         setTimeout(() => {
           alert(message)
         }, 500);
-      }
+      } */
       
 
       if (this.value === 2048) {
@@ -142,7 +155,6 @@
 
     }
 
-    
 
     setXY(x, y) {
       this.x = x
@@ -188,8 +200,8 @@ function setInput() {
 }
 
 function updateScoreDisplay() {
-  const scoreElement = document.getElementById('score');
-  scoreElement.textContent = `Score: ${score}`;
+  const scoreElement = document.getElementById('score')
+  scoreElement.textContent = `Score: ${score}`
 }
 
 
@@ -240,11 +252,17 @@ async function handleInput(event) {
   const newTile = new Tile(game)
   board.getRandomEmptyItem().linkTile(newTile)
 
-  if (!canMoveUp() && !canMoveDown() && !canMoveLeft() && !canMoveRight()) {
+  /* if (!canMoveUp() && !canMoveDown() && !canMoveLeft() && !canMoveRight()) {
     //await newTile.waitMoveCheck()
     alert('Loose???Ohhh...Dont worry, next time will be the same result)))')
     return
-  }
+  } */
+
+    if (!canMoveUp() && !canMoveDown() && !canMoveLeft() && !canMoveRight()) {
+
+      endGame('Loose???Ohhh...Dont worry, next time will be the same result)))')
+      return;
+    }
 
 
   setInput()
@@ -272,7 +290,7 @@ async function moveTiles(itemsGroup) {
   await Promise.all(animationEnd)
 
   board.items.forEach(item => {
-    item.hasTileForCombine() && item.combineTiles();
+    item.hasTileForCombine() && item.combineTiles()
   })
   
 }
@@ -340,35 +358,70 @@ function canMoveInGroup(group) {
 }
 
 
-newGameBtn.addEventListener('click', startNewGame);
+newGameBtn.addEventListener('click', startNewGame)
 
 function startNewGame() {
-  // Сброс флага окончания игры
-  gameOver = false;
 
-  // Очистить текущее игровое поле
+  gameOver = false
+
+
   board.items.forEach(item => {
     if (item.linkedTile) {
-      item.linkedTile.removeFromDOM();  // Удалить плитки из DOM
-      item.notLinkTile();  // Удалить ссылку на плитку
+      item.linkedTile.removeFromDOM()
+      item.notLinkTile()
     }
     if (item.linkedTileForCombine) {
-      item.notLinkTileCombine();
+      item.notLinkTileCombine()
     }
   });
 
-  // Сбросить счет
-  score = 0;
-  updateScoreDisplay();
 
-  // Инициализировать новую игру (добавляем одну плитку на доску)
-  board.getRandomEmptyItem().linkTile(new Tile(game));
+  score = 0
+  updateScoreDisplay()
 
-  // Включить ввод с клавиатуры
-  setInput();
+  board.getRandomEmptyItem().linkTile(new Tile(game))
+
+
+  setInput()
 }
 
 
+const bestScoresList = document.getElementById('best-scores-list')
+
+
+function updateBestScoresDisplay() {
+    const bestScores = getBestScores()
+    bestScoresList.innerHTML = ''
+
+    bestScores.forEach((record, index) => {
+        const li = document.createElement('li')
+        li.textContent = `${index + 1}. Score: ${record}`
+        bestScoresList.appendChild(li)
+    })
+}
+
+function getBestScores() {
+    const bestScores = JSON.parse(localStorage.getItem('bestScores')) || []
+    return bestScores
+}
+
+function addBestScore(newScore) {
+    const bestScores = getBestScores()
+    
+    bestScores.push(newScore)
+    bestScores.sort((a, b) => b - a)
+
+    if (bestScores.length > 10) {
+        bestScores.pop()
+    }
+
+    localStorage.setItem('bestScores', JSON.stringify(bestScores))
+
+
+    updateBestScoresDisplay()
+}
+
+updateBestScoresDisplay()
 
 
 

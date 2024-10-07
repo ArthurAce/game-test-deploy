@@ -395,7 +395,9 @@ function updateBestScoresDisplay() {
 
     bestScores.forEach((record, index) => {
         const li = document.createElement('li')
-        li.textContent = `${index + 1}. Score: ${record}`
+        //li.textContent = `${index + 1}. Score: ${record}`
+        li.textContent = `Score: ${record}`
+
         bestScoresList.appendChild(li)
     })
 }
@@ -424,6 +426,53 @@ function addBestScore(newScore) {
 updateBestScoresDisplay()
 
 
+let touchStartX = 0
+let touchStartY = 0
+let isTouching = false
+
+game.addEventListener('touchstart', handleTouchStart, { 'passive': true })
+game.addEventListener('touchmove', handleTouchMove, { 'passive': true })
+game.addEventListener('touchend', handleTouchEnd, { 'passive': true })
+
+function handleTouchStart(event) {
+    const touch = event.touches[0]
+    touchStartX = touch.clientX
+    touchStartY = touch.clientY
+    isTouching = true
+}
+
+function handleTouchMove(event) {
+    if (!isTouching || gameOver) return
+
+    const touch = event.touches[0]
+    const touchEndX = touch.clientX
+    const touchEndY = touch.clientY
+
+    const deltaX = touchEndX - touchStartX
+    const deltaY = touchEndY - touchStartY
+
+    if (Math.abs(deltaX) > Math.abs(deltaY)) {
+        if (deltaX > 50) {
+            handleInput({ 'key': 'ArrowRight' })
+            isTouching = false
+        } else if (deltaX < -50) {
+            handleInput({ 'key': 'ArrowLeft' })
+            isTouching = false
+        }
+    } else {
+        if (deltaY > 50) {
+            handleInput({ 'key': 'ArrowDown' })
+            isTouching = false
+        } else if (deltaY < -50) {
+            handleInput({ 'key': 'ArrowUp' })
+            isTouching = false
+        }
+    }
+}
+
+function handleTouchEnd() {
+    isTouching = false
+}
 
 
 

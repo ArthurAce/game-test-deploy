@@ -49,7 +49,7 @@ body {
     align-items: center;
     font-size: 4vmin;
     border-radius: 5px;
-    transition: 0.1s all ease;
+    transition: 0.15s all ease;
 }
 
 .text {
@@ -75,8 +75,9 @@ body {
     left: 50%;
     transform: translateX(-50%);
     font-size: 12px;
-    width: 250px;
+    width: 260px;
     opacity: 0.3;
+    text-align: center;
 }
 
 .game-name {
@@ -160,11 +161,23 @@ body {
         text-align: center;
         border-bottom: 2px solid #f5f5f541;
         margin: 10px 0;
+        font-size: 32px;
     }
     &__list {
         color: #f5f5f5;
-        margin: 0 30px;
+        margin: 0 50px;
+        font-size: 20px;
     }
+}
+
+.game-title {
+    position: absolute;
+    bottom: 0;
+    left: 14%;
+    //transform: translateX(-50%);
+    font-size: 10vmin;
+    width: 100%;
+    opacity: 0.3;
 }
 
 footer {
@@ -205,5 +218,70 @@ footer {
     }
     a:hover, i:hover, .github:hover {
         color: rgb(170, 62, 0);
+    }
+}
+
+
+@media (max-width: 767px) {
+    body {
+        flex-direction: column;
+        //height: 200%;
+        margin-top: 150px;
+    }
+    .records {
+        margin-top: 20vmin;
+        width: 54vmin;
+        height: 62vmin;
+        &__title {
+            font-size: 26px;
+        }
+        &__list {
+            font-size: 12px;
+            transform: translateX(30%);
+        }
+    }
+    footer {
+        position: relative;
+        font-size: 18px;
+        padding: 30px;
+    }
+    .new-game {
+        top: -35%;
+    }
+    .score {
+        top: -24%;
+    }
+    .game-title {
+        left: 25%;
+    }
+}
+
+@media (max-width: 425px) {
+    .new-game {
+        top: -50%;
+    }
+    .text {
+        font-size: 16px;
+    }
+    .score {
+        font-size: 16px;
+    }
+    .rules {
+        bottom: -25%;
+    }
+    .records {
+        height: 64vmin;
+    }
+    footer {
+        font-size: 12px;
+        padding: 20px;
+        position: absolute;
+        .rsschool {
+            a {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        }
     }
 }

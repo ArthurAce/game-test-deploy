@@ -96,10 +96,6 @@ body {
     font-size: 148px;
     width: 100%;
     opacity: 0.3;
-    a {
-        text-decoration: none;
-        color: #160c03;
-    }
 }
 
 .new-game {
@@ -158,6 +154,7 @@ body {
         position: relative;
         font-weight: 600;
         transition: all 0.1s linear;
+        color: #160c03;
     }
 }
 
@@ -238,7 +235,7 @@ footer {
     body {
         flex-direction: column;
         height: 100%;
-        margin-top: 0px;
+        margin-top: 150px;
     }
     .records {
         margin-top: 10vmin;
@@ -258,7 +255,7 @@ footer {
         padding: 30px;
     }
     .new-game {
-        top: -35%;
+        top: -45%;
     }
     .score {
         top: -24%;
@@ -266,11 +263,15 @@ footer {
     .game-title {
         left: 25%;
     }
+    .rules {
+        font-size: 8px;
+        width: 250px;
+    }
 }
 
 @media (max-width: 425px) {
     body {
-        margin-top: 0px;
+        margin-top: 150px;
         height: 100%;
     }
     .new-game {

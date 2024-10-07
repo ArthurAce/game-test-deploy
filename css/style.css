@@ -120,10 +120,6 @@ body {
   width: 100%;
   opacity: 0.3;
 }
-.game-name a {
-  text-decoration: none;
-  color: #160c03;
-}
 
 .new-game {
   position: absolute;
@@ -186,6 +182,7 @@ body {
   font-weight: 600;
   -webkit-transition: all 0.1s linear;
   transition: all 0.1s linear;
+  color: #160c03;
 }
 
 .records {
@@ -267,7 +264,7 @@ footer a:hover, footer i:hover, footer .github:hover {
         -ms-flex-direction: column;
             flex-direction: column;
     height: 100%;
-    margin-top: 0px;
+    margin-top: 150px;
   }
   .records {
     margin-top: 10vmin;
@@ -287,7 +284,7 @@ footer a:hover, footer i:hover, footer .github:hover {
     padding: 30px;
   }
   .new-game {
-    top: -35%;
+    top: -45%;
   }
   .score {
     top: -24%;
@@ -295,10 +292,14 @@ footer a:hover, footer i:hover, footer .github:hover {
   .game-title {
     left: 25%;
   }
+  .rules {
+    font-size: 8px;
+    width: 250px;
+  }
 }
 @media (max-width: 425px) {
   body {
-    margin-top: 0px;
+    margin-top: 150px;
     height: 100%;
   }
   .new-game {

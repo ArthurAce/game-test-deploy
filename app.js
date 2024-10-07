@@ -475,4 +475,50 @@ function handleTouchEnd() {
 }
 
 
+let mouseStartX = 0
+let mouseStartY = 0
+let isMouseDragging = false
+
+
+game.addEventListener('mousedown', handleMouseDown)
+window.addEventListener('mousemove', handleMouseMove)
+window.addEventListener('mouseup', handleMouseUp)
+
+function handleMouseDown(event) {
+    mouseStartX = event.clientX
+    mouseStartY = event.clientY
+    isMouseDragging = true
+}
+
+function handleMouseMove(event) {
+    if (!isMouseDragging || gameOver) return
+
+    const mouseEndX = event.clientX
+    const mouseEndY = event.clientY
+
+    const deltaX = mouseEndX - mouseStartX
+    const deltaY = mouseEndY - mouseStartY
+
+    if (Math.abs(deltaX) > Math.abs(deltaY)) {
+        if (deltaX > 50) {
+            handleInput({ 'key': 'ArrowRight' })
+            isMouseDragging = false
+        } else if (deltaX < -50) {
+            handleInput({ 'key': 'ArrowLeft' })
+            isMouseDragging = false
+        }
+    } else {
+        if (deltaY > 50) {
+            handleInput({ 'key': 'ArrowDown' })
+            isMouseDragging = false
+        } else if (deltaY < -50) {
+            handleInput({ 'key': 'ArrowUp' })
+            isMouseDragging = false
+        }
+    }
+}
+
+function handleMouseUp() {
+    isMouseDragging = false
+}
 

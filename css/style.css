@@ -254,7 +254,7 @@ footer a:hover, footer i:hover, footer .github:hover {
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
             flex-direction: column;
-    min-height: 100%;
+    height: 100%;
     margin-top: 0px;
   }
   .records {
@@ -287,6 +287,7 @@ footer a:hover, footer i:hover, footer .github:hover {
 @media (max-width: 425px) {
   body {
     margin-top: 0px;
+    height: 100%;
   }
   .new-game {
     top: -50%;

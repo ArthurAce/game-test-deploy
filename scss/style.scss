@@ -87,7 +87,11 @@ body {
     transform: translateX(-50%);
     font-size: 148px;
     width: 100%;
-    opacity: 0.3;  
+    opacity: 0.3;
+    a {
+        text-decoration: none;
+        color: #160c03;
+    }
 }
 
 .new-game {
@@ -225,11 +229,11 @@ footer {
 @media (max-width: 767px) {
     body {
         flex-direction: column;
-        //height: 200%;
-        margin-top: 150px;
+        min-height: 100%;
+        margin-top: 0px;
     }
     .records {
-        margin-top: 20vmin;
+        margin-top: 10vmin;
         width: 54vmin;
         height: 62vmin;
         &__title {
@@ -241,7 +245,7 @@ footer {
         }
     }
     footer {
-        position: relative;
+        //position: relative;
         font-size: 18px;
         padding: 30px;
     }
@@ -257,6 +261,10 @@ footer {
 }
 
 @media (max-width: 425px) {
+    body {
+        margin-top: 0px;
+        
+    }
     .new-game {
         top: -50%;
     }
@@ -267,10 +275,13 @@ footer {
         font-size: 16px;
     }
     .rules {
-        bottom: -25%;
+        bottom: -20%;
+        font-size: 8px;
+        width: 200px;
     }
     .records {
         height: 64vmin;
+        margin-top: 14vmin;
     }
     footer {
         font-size: 12px;
